@@ -5,6 +5,13 @@ var comments = ['Всё отлично!', 'В целом всё неплохо. 
 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 
+var url = function (n) {
+var photo = 'photos/{{i}}.jpg';
+for (var i = 0; i < n.length; i++) {
+  return photo[i];
+}
+}
+
 var likes = function (min, max) {
   var random = min - 0.5 + Math.random() * (max - min + 1)
   random = Math.round(rand);
