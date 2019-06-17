@@ -57,6 +57,7 @@ var newPicture = function (data) {
   var pictureArr = [];
   for (var i = 0; i < data.length; i++) {
     var pictureElement = picture.cloneNode(true);
+    pictureElement.querySelector('.picture__img').style.src = data[i].url;
     pictureElement.querySelector('.picture__likes').textContent = data[i].likes;
     pictureElement.querySelector('.picture__comments').textContent = data[i].commentArr;
   }
