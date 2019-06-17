@@ -13,7 +13,7 @@ for (var i = 0; i < n.length; i++) {
 }
 
 var likes = function (min, max) {
-  var random = min - 0.5 + Math.random() * (max - min + 1)
+  var random = min - 0.5 + Math.random() * (max - min + 1);
   random = Math.round(rand);
   return random;
 }
@@ -21,4 +21,12 @@ var likes = function (min, max) {
 var getRandomComment = function (comment) {
   var randomComment = comment[Math.floor(Math.random() * comment.length)];
   return randomComment;
+};
+
+var createNewArr = function (n) {
+  var ojectArr = [];
+  for (i = 0; i < n; i++) {
+    ojectArr[i] = {url: function(photo), likes: function(random), comments: function(randomComment)};
+  }
+  return ojectArr;
 };
