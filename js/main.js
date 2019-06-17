@@ -6,7 +6,7 @@ var comments = ['Всё отлично!', 'В целом всё неплохо. 
 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 
 var url = function (n) {
-return 'photos/' + n + '.jpg';
+  return 'photos/' + n + '.jpg';
 }
 
 var likes = function (min, max) {
@@ -26,7 +26,10 @@ var getRandomName = function (Name) {
 };
 
 var getRandomAvatar = function (n) {
-return 'img/' + n + '.svg';
+  for (i = 0; i < n; i++) {
+    var avatar = Avatar[Math.floor(Math.random() * n.length)];
+    return 'img/' + avatar[i] + '.svg';
+  }
 }
 
 var commentArr = function (n) {
@@ -40,7 +43,30 @@ var commentArr = function (n) {
 var createNewArr = function (n) {
   var ojectArr = [];
   for (i = 0; i < n; i++) {
-    ojectArr[i] = {url: url(n), likes: likes(min, max), comments: getRandomComment(comment)};
+    ojectArr[i] = {url: url(n), likes: likes(min, max), comments: commentArr(Math.floor(Math.random() * 10))};
   }
   return ojectArr;
 };
+
+document.querySelector('.setup-similar').classList.remove('hidden');
+var picture = document.querySelector('#picture')
+.content
+.querySelector('.picture');
+
+var newPicture = function (data) {
+  var pictureArr = [];
+  for (var i = 0; i < data.length; i++) {
+    var pictureElement = picture.cloneNode(true);
+    pictureElement.querySelector('.picture__likes').textContent = data[i].likes;
+    pictureElement.querySelector('.picture__comments').textContent = data[i].commentArr;
+  }
+  return pictureArr;
+};
+
+var objectArr = createNewArr(6);
+var pictureArr = newPicture(objectArr);
+
+var fragment = document.createDocumentFragment();
+for (var i = 0; i < pictureArr.length; i++) {
+  fragment.appendChild(pictureArr[i]);
+}
