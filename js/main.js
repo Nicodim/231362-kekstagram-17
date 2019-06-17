@@ -53,18 +53,21 @@ var picture = document.querySelector('#picture')
 .querySelector('.picture');
 
 var newPicture = function (data) {
+  var picturedArr = [];
+  for (var i = 0; i < data.length; i++) {
     var pictureElement = picture.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = data.url;
     pictureElement.querySelector('.picture__likes').textContent = data.likes;
     pictureElement.querySelector('.picture__comments').textContent = data.commentArr;
+    picturedArr.push(pictureElement)
   }
-  return pictureElement;
+  return picturedArr;
 };
 
 function addPictures(arr) {
-var fragment = document.createDocumentFragment();
-for (var i = 0; i < arr.length; i++) {
-  fragment.appendChild(ojectArr(pictureElement[i]));
-}
-return fragment;
+  var fragment = document.createDocumentFragment
+  for (var i = 0; i < arr.length; i++) {
+    fragment.appendChild(ojectArr(picturedArr));
+  }
+  return fragment;
 }
