@@ -48,26 +48,23 @@ var createNewArr = function (n) {
   return ojectArr;
 };
 
-document.querySelector('.setup-similar').classList.remove('hidden');
 var picture = document.querySelector('#picture')
 .content
 .querySelector('.picture');
 
 var newPicture = function (data) {
-  var pictureArr = [];
-  for (var i = 0; i < data.length; i++) {
     var pictureElement = picture.cloneNode(true);
-    pictureElement.querySelector('.picture__img').style.src = data[i].url;
-    pictureElement.querySelector('.picture__likes').textContent = data[i].likes;
-    pictureElement.querySelector('.picture__comments').textContent = data[i].commentArr;
+    pictureElement.querySelector('.picture__img').src = data.url;
+    pictureElement.querySelector('.picture__likes').textContent = data.likes;
+    pictureElement.querySelector('.picture__comments').textContent = data.commentArr;
   }
-  return pictureArr;
+  return pictureElement;
 };
 
-var objectArr = createNewArr(6);
-var pictureArr = newPicture(objectArr);
-
+function addPictures(arr) {
 var fragment = document.createDocumentFragment();
-for (var i = 0; i < pictureArr.length; i++) {
-  fragment.appendChild(pictureArr[i]);
+for (var i = 0; i < arr.length; i++) {
+  fragment.appendChild(ojectArr(pictureElement[i]));
+}
+return fragment;
 }
