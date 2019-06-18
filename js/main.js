@@ -1,5 +1,5 @@
 'use strict';
-var name = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
+var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
@@ -11,39 +11,37 @@ var url = function (n) {
 
 var likes = function (min, max) {
   var random = min - 0.5 + Math.random() * (max - min + 1);
-  random = Math.round(rand);
+  random = Math.round(random);
   return random;
 }
 
 var getRandomComment = function (comment) {
-  var randomComment = comment[Math.floor(Math.random() * commentst.length)];
+  var randomComment = comment[Math.floor(Math.random() * comments.length)];
   return randomComment;
 };
 
 var getRandomName = function (Name) {
-  var randomName = Name[Math.floor(Math.random() * name.length)];
+  var randomName = Name[Math.floor(Math.random() * Name.length)];
   return randomName;
 };
 
 var getRandomAvatar = function (n) {
-  for (i = 0; i < n; i++) {
-    var avatar = Avatar[Math.floor(Math.random() * n.length)];
-    return 'img/' + avatar[i] + '.svg';
-  }
+  return 'img/' + Math.floor(Math.random() * (n + 1 - 1)) + 1; + '.svg';
 }
 
 var commentArr = function (n) {
   var user = [];
-  for (i = 0; i < n; i++) {
-    user[i] = {avatar: getRandomAvatar(n), message: getRandomComment(comment), name: getRandomName(Name)};
+  for (var i = 0; i < n; i++) {
+    user[i] = {avatar: getRandomAvatar(6), message: getRandomComment(comments), name: getRandomName(names)};
   }
   return user;
 };
 
 var createNewArr = function (n) {
   var ojectArr = [];
-  for (i = 0; i < n; i++) {
-    ojectArr[i] = {url: url(n), likes: likes(min, max), comments: commentArr(Math.floor(Math.random() * 10))};
+  var min = 0, max = 100;
+  for (var i = 1; i <= n; i++) {
+    ojectArr.push({url: url(i), likes: likes(min, max), comments: commentArr(Math.floor(Math.random() * 10))});
   }
   return ojectArr;
 };
@@ -56,18 +54,23 @@ var newPicture = function (data) {
   var picturedArr = [];
   for (var i = 0; i < data.length; i++) {
     var pictureElement = picture.cloneNode(true);
-    pictureElement.querySelector('.picture__img').src = data.url;
-    pictureElement.querySelector('.picture__likes').textContent = data.likes;
-    pictureElement.querySelector('.picture__comments').textContent = data.commentArr;
+    pictureElement.querySelector('.picture__img').src = data[i].url;
+    pictureElement.querySelector('.picture__likes').textContent = data[i].likes;
+    pictureElement.querySelector('.picture__comments').textContent = data[i].comments.length;
     picturedArr.push(pictureElement)
   }
   return picturedArr;
 };
 
 function addPictures(arr) {
-  var fragment = document.createDocumentFragment
+  var fragment = document.createDocumentFragment();
   for (var i = 0; i < arr.length; i++) {
-    fragment.appendChild(ojectArr(picturedArr));
+    fragment.appendChild(arr[i]);
   }
   return fragment;
 }
+
+var array = createNewArr(25);
+var pictures = newPicture(array);
+var fragment = addPictures(pictures);
+document.querySelector('.pictures').appendChild(fragment);
