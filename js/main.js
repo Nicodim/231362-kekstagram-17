@@ -1,19 +1,17 @@
 'use strict';
 var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
+'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 
 var url = function (n) {
   return 'photos/' + n + '.jpg';
-}
+};
 
 var likes = function (min, max) {
   var random = min - 0.5 + Math.random() * (max - min + 1);
   random = Math.round(random);
   return random;
-}
+};
 
 var getRandomComment = function (comment) {
   var randomComment = comment[Math.floor(Math.random() * comments.length)];
@@ -27,7 +25,7 @@ var getRandomName = function (Name) {
 
 var getRandomAvatar = function (n) {
   return 'img/' + Math.floor(Math.random() * (n + 1 - 1)) + 1; + '.svg';
-}
+};
 
 var commentArr = function (n) {
   var user = [];
@@ -57,7 +55,7 @@ var newPicture = function (data) {
     pictureElement.querySelector('.picture__img').src = data[i].url;
     pictureElement.querySelector('.picture__likes').textContent = data[i].likes;
     pictureElement.querySelector('.picture__comments').textContent = data[i].comments.length;
-    picturedArr.push(pictureElement)
+    picturedArr.push(pictureElement);
   }
   return picturedArr;
 };
