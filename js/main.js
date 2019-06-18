@@ -24,7 +24,7 @@ var getRandomName = function (Name) {
 
 var getRandomAvatar = function (n) {
   return 'img/' + Math.floor(Math.random() * (n + 1 - 1)) + 1 + '.svg';
-}
+};
 
 var commentArr = function (n) {
   var user = [];
