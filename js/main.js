@@ -86,20 +86,22 @@ uploadOpen.addEventListener('change', function () {
     if (evt.keyCode === 27) {
       upload.classList.add('hidden');
     }
-    document.getElementById("upload-file").reset();
   });
 });
 
 uploadClose.addEventListener('click', function() {
   upload.classList.add('hidden');
-  document.getElementById("upload-file").reset();
 });
 
 change.addEventListener('change', function (evt) {
 var target = evt.target;
-if (target.changed != 'checked') {
-return;
+  while (target !== document) {
+  if (target.classList.contains('effects__radio')) {
+    changed(target);
+  return;
+  }
+  target = target.parentNode;
+  // changed.classList.remove('effects__radio');
+  // changed.classList.add('effects__preview--' + name);
 }
-  changed.classList.remove('effects__radio');
-  changed.classList.add('effects__preview--' + name);
 });
