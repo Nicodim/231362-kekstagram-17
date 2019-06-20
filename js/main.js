@@ -76,17 +76,25 @@ document.querySelector('.pictures').appendChild(fragment);
 var upload = document.querySelector('.img-upload__overlay');
 var uploadOpen = document.getElementById('upload-file');
 var uploadClose = document.getElementById('upload-cancel');
+var change = document.querySelectorAll('.effects__radio')
 
-uploadOpen.addEventListener('change', function() {
+uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
 
-  document.addEventListener('keydown', function(evt) {
+  document.addEventListener('keydown', function (evt) {
     if (evt.keyCode === 27) {
       upload.classList.add('hidden');
     }
+    document.getElementById("upload-file").reset();
   });
 });
 
 uploadClose.addEventListener('click', function() {
   upload.classList.add('hidden');
+  document.getElementById("upload-file").reset();
+});
+
+change.addEventListener('change', function (name) {
+  change.classList.remove('effects__radio');
+  change.classList.add('effects__preview--' + 'name');
 });
