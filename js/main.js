@@ -92,14 +92,20 @@ uploadOpen.addEventListener('change', function () {
 
 uploadClose.addEventListener('click', function() {
   upload.classList.add('hidden');
+  document.getElementById("upload-file").reset();
 });
 
+var oldValue = null;
 change.addEventListener('change', function (evt) {
 var target = evt.target;
   while (target !== document) {
   if (target.classList.contains('effects__radio')) {
+    if (oldValue !== null) {
+      img.classList.remove('effects__preview--' + oldValue);
+    }
+    oldValue = target.value;
     img.classList.add('effects__preview--' + target.value);
   return;
   }
-  target = target.parentNode;
+  target = target.parentNode;}
 });
