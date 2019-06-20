@@ -78,6 +78,7 @@ var uploadOpen = document.getElementById('upload-file');
 var uploadClose = document.getElementById('upload-cancel');
 var change = document.querySelector('.effects__list');
 var changed = document.querySelector('.effects__radio');
+var img = document.querySelector('.img-upload__preview');
 
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
@@ -97,11 +98,8 @@ change.addEventListener('change', function (evt) {
 var target = evt.target;
   while (target !== document) {
   if (target.classList.contains('effects__radio')) {
-    changed(target);
+    img.classList.add('effects__preview--' + target.value);
   return;
   }
   target = target.parentNode;
-  // changed.classList.remove('effects__radio');
-  // changed.classList.add('effects__preview--' + name);
-}
 });
