@@ -77,7 +77,7 @@ var upload = document.querySelector('.img-upload__overlay');
 var uploadOpen = document.getElementById('upload-file');
 var uploadClose = document.getElementById('upload-cancel');
 var change = document.querySelector('.effects__list');
-var changed = document.querySelector('.effects__item');
+var changed = document.querySelector('.effects__radio');
 
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
@@ -95,6 +95,11 @@ uploadClose.addEventListener('click', function() {
   document.getElementById("upload-file").reset();
 });
 
-change.addEventListener('change', function (name) {
-  change.input.classList.add('effects__preview--' + 'name');
+change.addEventListener('change', function (evt) {
+var target = evt.target;
+if (target.changed != 'checked') {
+return;
+}
+  changed.classList.remove('effects__radio');
+  changed.classList.add('effects__preview--' + name);
 });
