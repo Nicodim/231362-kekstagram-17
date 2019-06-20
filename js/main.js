@@ -76,7 +76,8 @@ document.querySelector('.pictures').appendChild(fragment);
 var upload = document.querySelector('.img-upload__overlay');
 var uploadOpen = document.getElementById('upload-file');
 var uploadClose = document.getElementById('upload-cancel');
-var change = document.querySelectorAll('.effects__radio')
+var change = document.querySelector('.effects__list');
+var changed = document.querySelector('.effects__item');
 
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
@@ -95,6 +96,5 @@ uploadClose.addEventListener('click', function() {
 });
 
 change.addEventListener('change', function (name) {
-  change.classList.remove('effects__radio');
-  change.classList.add('effects__preview--' + 'name');
+  change.input.classList.add('effects__preview--' + 'name');
 });
