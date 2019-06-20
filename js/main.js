@@ -72,3 +72,21 @@ var array = createNewArr(25);
 var pictures = newPicture(array);
 var fragment = addPictures(pictures);
 document.querySelector('.pictures').appendChild(fragment);
+
+var upload = document.querySelector('.img-upload__overlay');
+var uploadOpen = document.getElementById('upload-file');
+var uploadClose = document.getElementById('upload-cancel');
+
+uploadOpen.addEventListener('change', function() {
+  upload.classList.remove('hidden');
+
+  document.addEventListener('keydown', function(evt) {
+    if (evt.keyCode === 27) {
+      upload.classList.add('hidden');
+    }
+  });
+});
+
+uploadClose.addEventListener('click', function() {
+  upload.classList.add('hidden');
+});
