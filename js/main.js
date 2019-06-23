@@ -77,8 +77,10 @@ var upload = document.querySelector('.img-upload__overlay');
 var uploadOpen = document.getElementById('upload-file');
 var uploadClose = document.getElementById('upload-cancel');
 var change = document.querySelector('.effects__list');
-// var changed = document.querySelector('.effects__radio');
 var img = document.querySelector('.img-upload__preview');
+var smoll = document.querySelector('.scale__control--smaller');
+var big = document.querySelector('.scale__control--bigger');
+var bar = document.querySelector('.scale__control--value');
 
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
@@ -92,7 +94,6 @@ uploadOpen.addEventListener('change', function () {
 
 uploadClose.addEventListener('click', function () {
   upload.classList.add('hidden');
-  // document.getElementById('upload-file').reset();
 });
 
 var oldValue = null;
@@ -109,4 +110,19 @@ change.addEventListener('change', function (evt) {
     }
     target = target.parentNode;
   }
+});
+
+var getControlValue = function (carrent, min, max) {
+var min = 25;
+var max = 100;
+if (min <= carrent <= max) {
+  return true;
+}
+};
+
+smoll.addEventListener('click', function () {
+  if getControlValue {
+    bar - 25;
+  }
+  return;
 });
