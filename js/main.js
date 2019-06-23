@@ -112,17 +112,22 @@ change.addEventListener('change', function (evt) {
   }
 });
 
-var getControlValue = function (carrent, min, max) {
+var getControlValue = function (current, min, max) {
 var min = 25;
 var max = 100;
-if (min <= carrent <= max) {
+if (min <= current <= max) {
   return true;
 }
 };
 
 smoll.addEventListener('click', function () {
-  if getControlValue {
-    bar - 25;
-  }
+  if (getControlValue) {
+  bar.getAttribute('value') = - 25%;
+  return;
+});
+
+big.addEventListener('click', function () {
+  if (getControlValue) {
+  bar.getAttribute('value') = + 25%;
   return;
 });
