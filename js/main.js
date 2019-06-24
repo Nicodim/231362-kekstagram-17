@@ -82,6 +82,7 @@ var smoll = document.querySelector('.scale__control--smaller');
 var big = document.querySelector('.scale__control--bigger');
 var bar = document.querySelector('.scale__control--value');
 
+// открытие и закрытия попапа.
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
 
@@ -96,6 +97,7 @@ uploadClose.addEventListener('click', function () {
   upload.classList.add('hidden');
 });
 
+// делегирование кнопок
 var oldValue = null;
 change.addEventListener('change', function (evt) {
   var target = evt.target;
@@ -113,21 +115,29 @@ change.addEventListener('change', function (evt) {
 });
 
 var getControlValue = function (current, min, max) {
-var min = 25;
-var max = 100;
-if (min <= current <= max) {
-  return true;
-}
+  var min = 25;
+  var max = 100;
+  if (min <= current <= max) {
+    return true;
+  }
 };
 
 smoll.addEventListener('click', function () {
-  if (getControlValue) {
-  bar.getAttribute('value') = - 25%;
+  var current = parseInt(bar.getAttribute('value'), 10);
+  var getValue = getControlValue (current, 25, 100);
+  if ( 25 <= current <= 100) {
+    // bar.getAttribute('value') = parseInt(bar.getAttribute('value'), 10) + 25;
+    bar.setAttribute('value', parseInt(bar.getAttribute('value'), 10) - 25 + '%');
+  }
   return;
 });
 
 big.addEventListener('click', function () {
-  if (getControlValue) {
-  bar.getAttribute('value') = + 25%;
+  var current = parseInt(bar.getAttribute('value'), 10);
+  var getValue = getControlValue (current, 25, 100);
+  if ( 25 <= current <= 100) {
+    // bar.getAttribute('value') = parseInt(bar.getAttribute('value'), 10) + 25;
+    bar.setAttribute('value', parseInt(bar.getAttribute('value'), 10) + 25 + '%');
+  }
   return;
 });
