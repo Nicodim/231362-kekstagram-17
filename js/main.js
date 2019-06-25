@@ -81,7 +81,7 @@ var img = document.querySelector('.img-upload__preview');
 var smoll = document.querySelector('.scale__control--smaller');
 var big = document.querySelector('.scale__control--bigger');
 var bar = document.querySelector('.scale__control--value');
-
+var pin = document.querySelector('.effect-level__pin');
 // открытие и закрытия попапа.
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
@@ -113,31 +113,31 @@ change.addEventListener('change', function (evt) {
     target = target.parentNode;
   }
 });
-
+// функция ограничения
 var getControlValue = function (current, min, max) {
   var min = 25;
   var max = 100;
-  if (min <= current <= max) {
-    return true;
-  }
+  return min <= current && current <= max;
 };
 
+// Кнопка '+'
 smoll.addEventListener('click', function () {
-  var current = parseInt(bar.getAttribute('value'), 10);
+  // шаг кнопки по клику
+  var current = parseInt(bar.getAttribute('value'), 10) - 25;
   var getValue = getControlValue (current, 25, 100);
-  if ( 25 <= current <= 100) {
-    // bar.getAttribute('value') = parseInt(bar.getAttribute('value'), 10) + 25;
-    bar.setAttribute('value', parseInt(bar.getAttribute('value'), 10) - 25 + '%');
+  if (!getValue) {
+    current = 25;
   }
+  bar.setAttribute('value', current + '%');
   return;
 });
-
+// кнопка '-'
 big.addEventListener('click', function () {
-  var current = parseInt(bar.getAttribute('value'), 10);
+  var current = parseInt(bar.getAttribute('value'), 10) + 25;
   var getValue = getControlValue (current, 25, 100);
-  if ( 25 <= current <= 100) {
-    // bar.getAttribute('value') = parseInt(bar.getAttribute('value'), 10) + 25;
-    bar.setAttribute('value', parseInt(bar.getAttribute('value'), 10) + 25 + '%');
+  if (!getValue) {
+    current = 100;
   }
+  bar.setAttribute('value', current + '%');
   return;
 });
