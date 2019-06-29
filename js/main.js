@@ -81,7 +81,9 @@ var img = document.querySelector('.img-upload__preview');
 var smoll = document.querySelector('.scale__control--smaller');
 var big = document.querySelector('.scale__control--bigger');
 var bar = document.querySelector('.scale__control--value');
+var line = document.querySelector('.effect-level__line');
 var pin = document.querySelector('.effect-level__pin');
+var value = document.querySelector('.effect-level__value');
 // открытие и закрытия попапа.
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
@@ -131,8 +133,10 @@ smoll.addEventListener('click', function () {
   bar.setAttribute('value', current + '%');
   return;
 });
+
 // кнопка '-'
 big.addEventListener('click', function () {
+  // шаг кнопки по клику
   var current = parseInt(bar.getAttribute('value'), 10) + 25;
   var getValue = getControlValue (current, 25, 100);
   if (!getValue) {
@@ -140,4 +144,19 @@ big.addEventListener('click', function () {
   }
   bar.setAttribute('value', current + '%');
   return;
+});
+// var line = document.querySelector('.effect-level__line');
+// var pin = document.querySelector('.effect-level__pin');
+// var value = document.querySelector('.effect-level__value');
+
+// функция получения координат
+var getCoords = function(element, evt) {
+    var rect = element.getBoundingClientRect();
+    return {x: evt.clientX - rect.left,  y: evt.clientY - rect.top};
+};
+
+
+pin.addEventListener('mouseup', function () {
+var value = Math.floor(getCoords(x, evt) / line * 100);
+return
 });
