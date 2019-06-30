@@ -152,9 +152,8 @@ function getCoords(element, evt) {
   return {x: evt.clientX - rect.left,  y: evt.clientY - rect.top};
 }
 
-var line = document.querySelector('.line');
-
-document.querySelector('.pin').addEventListener('mousedown', function(evt) {
+var line = document.querySelector('.effect-level__line');
+document.querySelector('.effect-level__pin').addEventListener('mousedown', function(evt) {
   var target = evt.target;
   var shifts = getCoords(target, evt);
 
@@ -168,7 +167,7 @@ document.querySelector('.pin').addEventListener('mousedown', function(evt) {
       value = 100;
     }
 
-    target.style.left = Math.floor(value) + '%';
+    target.style.left = Math.ceil(value) + '%';
   };
 
   document.onmouseup = function (evt) {
@@ -191,10 +190,12 @@ function changeEffect(current) {
     Effect = 'invert';
     effectValue = current + '%';
   }
+
   if (IMG_PREWIEW.classList.contains('effects__preview--phobos')) {
     Effect = 'blur';
     effectValue = (current / 100 * 3) + 'px';
   }
+
   if (IMG_PREWIEW.classList.contains('effects__preview--heat')) {
     Effect = 'brightness';
     effectValue = (current / (100 - 2) + 1);
