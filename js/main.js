@@ -149,14 +149,59 @@ big.addEventListener('click', function () {
 // var pin = document.querySelector('.effect-level__pin');
 // var value = document.querySelector('.effect-level__value');
 
-// функция получения координат
-var getCoords = function(element, evt) {
-    var rect = element.getBoundingClientRect();
-    return {x: evt.clientX - rect.left,  y: evt.clientY - rect.top};
+// // функция получения координат
+// var getCoords = function(element, evt) {
+//     var rect = element.getBoundingClientRect();
+//     return {x: evt.clientX - rect.left,  y: evt.clientY - rect.top};
+// };
+//
+//
+// pin.addEventListener('mouseup', function () {
+// var value = Math.floor(getCoords(x, evt) / line * 100);
+// return value;
+// });
+
+var pin = setup.querySelector('.effect-level__pin');
+pin.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+
+  var startCoords = {
+  x: evt.clientX
 };
 
+var dragged = false;
 
-pin.addEventListener('mouseup', function () {
-var value = Math.floor(getCoords(x, evt) / line * 100);
-return
+var onMouseMove = function (moveEvt) {
+  moveEvt.preventDefault();
+  dragged = true;
+
+  var shift = {
+    x: startCoords.x - moveEvt.clientX
+  };
+
+  startCoords = {
+    x: moveEvt.clientX
+  };
+
+  setup.style.left = (setup.offsetLeft - shift.x) + 'px';
+};
+
+var onMouseUp = function (upEvt) {
+  upEvt.preventDefault();
+
+  document.removeEventListener('mousemove', onMouseMove);
+  document.removeEventListener('mouseup', onMouseUp);
+
+  if (dragged) {
+  var onClickPreventDefault = function (evt) {
+    evt.preventDefault();
+    pin.removeEventListener('click', onClickPreventDefault)
+  };
+  pin.addEventListener('click', onClickPreventDefault);
+}
+
+};
+
+document.addEventListener('mousemove', onMouseMove);
+document.addEventListener('mouseup', onMouseUp);
 });
