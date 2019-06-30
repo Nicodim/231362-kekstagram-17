@@ -145,63 +145,62 @@ big.addEventListener('click', function () {
   bar.setAttribute('value', current + '%');
   return;
 });
-// var line = document.querySelector('.effect-level__line');
-// var pin = document.querySelector('.effect-level__pin');
-// var value = document.querySelector('.effect-level__value');
 
-// // функция получения координат
-// var getCoords = function(element, evt) {
-//     var rect = element.getBoundingClientRect();
-//     return {x: evt.clientX - rect.left,  y: evt.clientY - rect.top};
-// };
-//
-//
-// pin.addEventListener('mouseup', function () {
-// var value = Math.floor(getCoords(x, evt) / line * 100);
-// return value;
-// });
-
-var pin = setup.querySelector('.effect-level__pin');
-pin.addEventListener('mousedown', function (evt) {
-  evt.preventDefault();
-
-  var startCoords = {
-  x: evt.clientX
-};
-
-var dragged = false;
-
-var onMouseMove = function (moveEvt) {
-  moveEvt.preventDefault();
-  dragged = true;
-
-  var shift = {
-    x: startCoords.x - moveEvt.clientX
-  };
-
-  startCoords = {
-    x: moveEvt.clientX
-  };
-
-  setup.style.left = (setup.offsetLeft - shift.x) + 'px';
-};
-
-var onMouseUp = function (upEvt) {
-  upEvt.preventDefault();
-
-  document.removeEventListener('mousemove', onMouseMove);
-  document.removeEventListener('mouseup', onMouseUp);
-
-  if (dragged) {
-  var onClickPreventDefault = function (evt) {
-    evt.preventDefault();
-    pin.removeEventListener('click', onClickPreventDefault)
-  };
-  pin.addEventListener('click', onClickPreventDefault);
+// функция получения координат
+function getCoords(element, evt) {
+  var rect = element.getBoundingClientRect();
+  return {x: evt.clientX - rect.left,  y: evt.clientY - rect.top};
 }
 
-};
+var line = document.querySelector('.line');
 
-document.addEventListener('mousemove', onMouseMove);
-document.addEventListener('mouseup', onMouseUp);
+document.querySelector('.pin').addEventListener('mousedown', function(evt) {
+  var target = evt.target;
+  var shifts = getCoords(target, evt);
+
+  document.onmousemove = function (evt) {
+    var coords = getCoords(line, evt);
+    var value = (coords.x - shifts.x) / line.offsetWidth * 100;
+    if (value < 0){
+      value = 0;
+    }
+    if (value > 100){
+      value = 100;
+    }
+
+    target.style.left = Math.floor(value) + '%';
+  };
+
+  document.onmouseup = function (evt) {
+    document.onmousemove = null;
+    document.onmouseup = null;
+  }
 });
+
+// изменение насыщенности
+function changeEffect(current) {
+
+  var Effect = 'grayscale';
+  var effectValue = current / 100;
+
+  if (IMG_PREWIEW.classList.contains('effects__preview--sepia')) {
+    Effect = 'sepia';
+  }
+
+  if (IMG_PREWIEW.classList.contains('effects__preview--marvin')) {
+    Effect = 'invert';
+    effectValue = current + '%';
+  }
+  if (IMG_PREWIEW.classList.contains('effects__preview--phobos')) {
+    Effect = 'blur';
+    effectValue = (current / 100 * 3) + 'px';
+  }
+  if (IMG_PREWIEW.classList.contains('effects__preview--heat')) {
+    Effect = 'brightness';
+    effectValue = (current / (100 - 2) + 1);
+  }
+
+  IMG_PREWIEW.style.filter = Effect + '(' + effectValue + ')';
+
+  return;
+}
