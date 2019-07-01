@@ -83,7 +83,7 @@ var big = document.querySelector('.scale__control--bigger');
 var bar = document.querySelector('.scale__control--value');
 var line = document.querySelector('.effect-level__line');
 var pin = document.querySelector('.effect-level__pin');
-var value = document.querySelector('.effect-level__value');
+var effectLevel = document.querySelector('.effect-level__value');
 // открытие и закрытия попапа.
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
@@ -200,7 +200,7 @@ document.querySelector('.effect-level__pin').addEventListener('mousedown', funct
     // var value = document.querySelector('.effect-level__value');
     target.style.left = Math.ceil(value) + '%';
     changeEffect( Math.ceil(value));
-    value.value = Math.ceil(value);
+    effectLevel.value = Math.ceil(value);
   };
 
   document.onmouseup = function (evt) {
