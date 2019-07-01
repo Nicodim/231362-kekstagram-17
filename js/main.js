@@ -115,6 +115,7 @@ change.addEventListener('change', function (evt) {
     target = target.parentNode;
   }
 });
+
 // функция ограничения
 var getControlValue = function (current, min, max) {
   var min = 25;
@@ -158,26 +159,26 @@ function changeEffect(current) {
   var Effect = 'grayscale';
   var effectValue = current / 100;
 
-  if (IMG_PREWIEW.classList.contains('effects__preview--sepia')) {
+  if (img.classList.contains('effects__preview--sepia')) {
     Effect = 'sepia';
   }
 
-  if (IMG_PREWIEW.classList.contains('effects__preview--marvin')) {
+  if (img.classList.contains('effects__preview--marvin')) {
     Effect = 'invert';
     effectValue = current + '%';
   }
 
-  if (IMG_PREWIEW.classList.contains('effects__preview--phobos')) {
+  if (img.classList.contains('effects__preview--phobos')) {
     Effect = 'blur';
     effectValue = (current / 100 * 3) + 'px';
   }
 
-  if (IMG_PREWIEW.classList.contains('effects__preview--heat')) {
+  if (img.classList.contains('effects__preview--heat')) {
     Effect = 'brightness';
     effectValue = (current / (100 - 2) + 1);
   }
 
-  IMG_PREWIEW.style.filter = Effect + '(' + effectValue + ')';
+  img.style.filter = Effect + '(' + effectValue + ')';
 
   return;
 }
