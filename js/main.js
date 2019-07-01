@@ -152,30 +152,6 @@ function getCoords(element, evt) {
   return {x: evt.clientX - rect.left,  y: evt.clientY - rect.top};
 }
 
-var line = document.querySelector('.effect-level__line');
-document.querySelector('.effect-level__pin').addEventListener('mousedown', function(evt) {
-  var target = evt.target;
-  var shifts = getCoords(target, evt);
-
-  document.onmousemove = function (evt) {
-    var coords = getCoords(line, evt);
-    var value = (coords.x - shifts.x) / line.offsetWidth * 100;
-    if (value < 0){
-      value = 0;
-    }
-    if (value > 100){
-      value = 100;
-    }
-
-    target.style.left = Math.ceil(value) + '%';
-  };
-
-  document.onmouseup = function (evt) {
-    document.onmousemove = null;
-    document.onmouseup = null;
-  }
-});
-
 // изменение насыщенности
 function changeEffect(current) {
 
@@ -205,3 +181,29 @@ function changeEffect(current) {
 
   return;
 }
+
+var line = document.querySelector('.effect-level__line');
+document.querySelector('.effect-level__pin').addEventListener('mousedown', function(evt) {
+  var target = evt.target;
+  var shifts = getCoords(target, evt);
+
+  document.onmousemove = function (evt) {
+    var coords = getCoords(line, evt);
+    var value = (coords.x - shifts.x) / line.offsetWidth * 100;
+    if (value < 0){
+      value = 0;
+    }
+    if (value > 100) {
+      value = 100;
+    }
+    // var value = document.querySelector('.effect-level__value');
+    target.style.left = Math.ceil(value) + '%';
+    changeEffect( Math.ceil(value));
+    value.value = Math.ceil(value);
+  };
+
+  document.onmouseup = function (evt) {
+    document.onmousemove = null;
+    document.onmouseup = null;
+  }
+});
