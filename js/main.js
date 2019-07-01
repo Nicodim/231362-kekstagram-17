@@ -197,7 +197,6 @@ document.querySelector('.effect-level__pin').addEventListener('mousedown', funct
     if (value > 100) {
       value = 100;
     }
-
     target.style.left = Math.ceil(value) + '%';
     changeEffect( Math.ceil(value));
     effectLevel.value = Math.ceil(value);
@@ -206,6 +205,7 @@ document.querySelector('.effect-level__pin').addEventListener('mousedown', funct
   document.onmouseup = function (evt) {
     document.onmousemove = null;
     document.onmouseup = null;
-    target.style.left = Math.ceil(value) + '%';
+    changeEffect(target.style.left);
+    effectLevel.value = target.style.left;
   }
 });
