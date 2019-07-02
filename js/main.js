@@ -116,8 +116,7 @@ change.addEventListener('change', function (evt) {
       oldValue = target.value;
       if (target.value === 'none') {
         label.classList.add('hidden');
-      }
-      else {
+      } else {
         label.classList.remove('hidden');
         img.classList.add('effects__preview--' + target.value);
         pin.style.left = 100 + '%';
