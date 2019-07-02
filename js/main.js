@@ -85,6 +85,10 @@ var line = document.querySelector('.effect-level__line');
 var pin = document.querySelector('.effect-level__pin');
 var effectLevel = document.querySelector('.effect-level__value');
 var depth = document.querySelector('.effect-level__depth');
+var label = document.querySelector('.img-upload__effect-level');
+var imgLabel = document.querySelector('.img-upload__label');
+var effect = document.querySelector('.img-upload__effects');
+
 // открытие и закрытия попапа.
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
@@ -110,17 +114,25 @@ change.addEventListener('change', function (evt) {
         img.classList.remove('effects__preview--' + oldValue);
       }
       oldValue = target.value;
+      if (target.value === 'none') {
+        label.classList.add('hidden');
+      }
+      else {
+
       img.classList.add('effects__preview--' + target.value);
-      if (target.classList.contains('effects__preview--none')) {
-        line.classList.add('hidden');
-        }
       pin.style.left = 100 + '%';
       depth.style.width = pin.style.left;
       return;
+      }
     }
 
     target = target.parentNode;
   }
+});
+
+imgLabel.addEventListener('change', function () {
+label.classList.add('hidden');
+effect.classList.add('hidden');
 });
 
 // функция ограничения
@@ -210,7 +222,7 @@ document.querySelector('.effect-level__pin').addEventListener('mousedown', funct
     effectLevel.value = Math.ceil(value);
   };
 
-    document.onmouseup = function () {
+  document.onmouseup = function () {
     document.onmousemove = null;
     document.onmouseup = null;
     changeEffect(target.style.left);
