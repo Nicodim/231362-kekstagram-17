@@ -118,11 +118,11 @@ change.addEventListener('change', function (evt) {
         label.classList.add('hidden');
       }
       else {
-
-      img.classList.add('effects__preview--' + target.value);
-      pin.style.left = 100 + '%';
-      depth.style.width = pin.style.left;
-      return;
+        label.classList.remove('hidden');
+        img.classList.add('effects__preview--' + target.value);
+        pin.style.left = 100 + '%';
+        depth.style.width = pin.style.left;
+        return;
       }
     }
 
@@ -131,8 +131,8 @@ change.addEventListener('change', function (evt) {
 });
 
 imgLabel.addEventListener('change', function () {
-label.classList.add('hidden');
-effect.classList.add('hidden');
+  label.classList.add('hidden');
+  effect.classList.add('hidden');
 });
 
 // функция ограничения
