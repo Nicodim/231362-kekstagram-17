@@ -92,6 +92,12 @@ var effect = document.querySelector('.img-upload__effects');
 // открытие и закрытия попапа.
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
+  label.classList.add('hidden');
+  if (oldValue !== null) {
+    document.querySelector('.effects__preview--' + oldValue);
+  }
+  img.classList.remove('effects__preview--' + oldValue);
+  img.removeAttribute('style');
 
   document.addEventListener('keydown', function (evt) {
     if (evt.keyCode === 27) {
