@@ -82,7 +82,9 @@ var smoll = document.querySelector('.scale__control--smaller');
 var big = document.querySelector('.scale__control--bigger');
 var bar = document.querySelector('.scale__control--value');
 var line = document.querySelector('.effect-level__line');
+var pin = document.querySelector('.effect-level__pin');
 var effectLevel = document.querySelector('.effect-level__value');
+var depth = document.querySelector('.effect-level__depth');
 // открытие и закрытия попапа.
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
@@ -109,16 +111,20 @@ change.addEventListener('change', function (evt) {
       }
       oldValue = target.value;
       img.classList.add('effects__preview--' + target.value);
+      if (target.classList.contains('effects__preview--none')) {
+        line.classList.add('hidden');
+        }
+      pin.style.left = 100 + '%';
+      depth.style.width = pin.style.left;
       return;
     }
+
     target = target.parentNode;
   }
 });
 
 // функция ограничения
 var getControlValue = function (current, min, max) {
-  // var min = 25;
-  // var max = 100;
   return min <= current && current <= max;
 };
 
@@ -158,6 +164,10 @@ function changeEffect(current) {
   var Effect = 'grayscale';
   var effectValue = current / 100;
 
+  if (img.classList.contains('effects__preview--grayscale')) {
+    Effect = 'grayscale';
+  }
+
   if (img.classList.contains('effects__preview--sepia')) {
     Effect = 'sepia';
   }
@@ -174,7 +184,7 @@ function changeEffect(current) {
 
   if (img.classList.contains('effects__preview--heat')) {
     Effect = 'brightness';
-    effectValue = (current / (100 - 2) + 1);
+    effectValue = (current / 100 * 2 + 1);
   }
 
   img.style.filter = Effect + '(' + effectValue + ')';
@@ -200,7 +210,7 @@ document.querySelector('.effect-level__pin').addEventListener('mousedown', funct
     effectLevel.value = Math.ceil(value);
   };
 
-  document.onmouseup = function (evt) {
+    document.onmouseup = function () {
     document.onmousemove = null;
     document.onmouseup = null;
     changeEffect(target.style.left);
