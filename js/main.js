@@ -1,4 +1,5 @@
 'use strict';
+var ESC_KEYCODE = 27;
 var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 
@@ -113,41 +114,40 @@ uploadClose.addEventListener('click', function () {
 
 // Объявили обработчик ESC
 var onPopupEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
-        closePopup();
-    }
+  if (evt.keyCode === ESC_KEYCODE) {
+    uploadClose();
+  }
 };
-
+// фокус на элементе
 document.addEventListener('focus', function (evt) {
-    var target = evt.target;
+  var target = evt.target;
 
-    while (target !== document) {
-        if (target.classList.contains('text__description')) {
-            document.removeEventListener('keydown', onPopupEscPress);
-        }
-        target = target.parentNode;
+  while (target !== document) {
+    if (target.classList.contains('text__description')) {
+      document.removeEventListener('keydown', onPopupEscPress);
     }
+    target = target.parentNode;
+  }
 }, true);
 
 document.addEventListener('blur', function (evt) {
-    var target = evt.target;
+  var target = evt.target;
 
-    while (target !== document) {
-        if (target.classList.contains('text__description')) {
-            document.addEventListener('keydown', onPopupEscPress);
-        }
-        target = target.parentNode;
+  while (target !== document) {
+    if (target.classList.contains('text__description')) {
+      document.addEventListener('keydown', onPopupEscPress);
     }
+    target = target.parentNode;
+  }
 }, true);
 
 // валидация
-socialText.addEventListener('invalid', function (evt) {
+socialText.addEventListener('invalid', function () {
   if (socialText.validity.tooLong) {
-  socialText.setCustomValidity('Комментарий не должен превышать 140-ка символов');
-}
-else {
-   socialText.setCustomValidity('');
- }
+    socialText.setCustomValidity('Комментарий не должен превышать 140-ка символов');
+  } else {
+    socialText.setCustomValidity('');
+  }
 });
 // делегирование кнопок
 var oldValue = null;
