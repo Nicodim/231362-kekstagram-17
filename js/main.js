@@ -89,6 +89,7 @@ var label = document.querySelector('.img-upload__effect-level');
 var imgLabel = document.querySelector('.img-upload__label');
 var effect = document.querySelector('.img-upload__effects');
 var socialText = document.querySelector('.social__footer-text');
+
 // открытие и закрытия попапа.
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
@@ -99,6 +100,10 @@ uploadOpen.addEventListener('change', function () {
   img.classList.remove('effects__preview--' + oldValue);
   img.removeAttribute('style');
 
+});
+
+uploadClose.addEventListener('click', function () {
+  upload.classList.add('hidden');
   document.addEventListener('keydown', function (evt) {
     if (evt.keyCode === 27) {
       upload.classList.add('hidden');
@@ -106,14 +111,38 @@ uploadOpen.addEventListener('change', function () {
   });
 });
 
-uploadClose.addEventListener('click', function () {
-  upload.classList.add('hidden');
-});
+// Объявили обработчик ESC
+var onPopupEscPress = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+        closePopup();
+    }
+};
 
+document.addEventListener('focus', function (evt) {
+    var target = evt.target;
+
+    while (target !== document) {
+        if (target.classList.contains('text__description')) {
+            document.removeEventListener('keydown', onPopupEscPress);
+        }
+        target = target.parentNode;
+    }
+}, true);
+
+document.addEventListener('blur', function (evt) {
+    var target = evt.target;
+
+    while (target !== document) {
+        if (target.classList.contains('text__description')) {
+            document.addEventListener('keydown', onPopupEscPress);
+        }
+        target = target.parentNode;
+    }
+}, true);
+
+// валидация
 socialText.addEventListener('invalid', function (evt) {
-  if (socialText.validity.tooShort) {
-  socialText.setCustomValidity('Комментарий должен состоять минимум из 1-го символа');
-} else if (socialText.validity.tooLong) {
+  if (socialText.validity.tooLong) {
   socialText.setCustomValidity('Комментарий не должен превышать 140-ка символов');
 }
 else {
