@@ -88,7 +88,7 @@ var depth = document.querySelector('.effect-level__depth');
 var label = document.querySelector('.img-upload__effect-level');
 var imgLabel = document.querySelector('.img-upload__label');
 var effect = document.querySelector('.img-upload__effects');
-
+var socialText = document.querySelector('.social__footer-text');
 // открытие и закрытия попапа.
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
@@ -110,6 +110,16 @@ uploadClose.addEventListener('click', function () {
   upload.classList.add('hidden');
 });
 
+socialText.addEventListener('invalid', function (evt) {
+  if (socialText.validity.tooShort) {
+  socialText.setCustomValidity('Комментарий должен состоять минимум из 1-го символа');
+} else if (socialText.validity.tooLong) {
+  socialText.setCustomValidity('Комментарий не должен превышать 140-ка символов');
+}
+else {
+   socialText.setCustomValidity('');
+ }
+});
 // делегирование кнопок
 var oldValue = null;
 change.addEventListener('change', function (evt) {
@@ -134,7 +144,7 @@ change.addEventListener('change', function (evt) {
     target = target.parentNode;
   }
 });
-
+// что это??
 imgLabel.addEventListener('change', function () {
   label.classList.add('hidden');
   effect.classList.add('hidden');
@@ -208,7 +218,7 @@ function changeEffect(current) {
 
   return;
 }
-
+// изменение положение пина и уровня эффекта
 document.querySelector('.effect-level__pin').addEventListener('mousedown', function (evt) {
   var target = evt.target;
   var shifts = getCoords(target, evt);
