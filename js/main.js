@@ -91,6 +91,12 @@ var imgLabel = document.querySelector('.img-upload__label');
 var effect = document.querySelector('.img-upload__effects');
 var socialText = document.querySelector('.social__footer-text');
 
+// Объявили обработчик ESC
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    uploadClose();
+  }
+};
 // открытие и закрытия попапа.
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
@@ -100,24 +106,14 @@ uploadOpen.addEventListener('change', function () {
   }
   img.classList.remove('effects__preview--' + oldValue);
   img.removeAttribute('style');
-
+  document.addEventListener('keydown', onPopupEscPress);
 });
 
 uploadClose.addEventListener('click', function () {
   upload.classList.add('hidden');
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === 27) {
-      upload.classList.add('hidden');
-    }
-  });
+  document.removeEventListener('keydown', onPopupEscPress);
 });
 
-// Объявили обработчик ESC
-var onPopupEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
-    uploadClose();
-  }
-};
 // фокус на элементе
 document.addEventListener('focus', function (evt) {
   var target = evt.target;
