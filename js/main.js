@@ -94,7 +94,7 @@ var socialText = document.querySelector('.social__footer-text');
 // Объявили обработчик ESC
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
-    uploadClose();
+    upClose();
   }
 };
 // открытие и закрытия попапа.
@@ -108,14 +108,15 @@ uploadOpen.addEventListener('change', function () {
   document.addEventListener('keydown', onPopupEscPress);
 });
 
-var uploadClose = function () {
+var upClose = function () {
   upload.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
 };
-// uploadClose.addEventListener('click', function () {
-//   upload.classList.add('hidden');
-//   document.removeEventListener('keydown', onPopupEscPress);
-// });
+
+uploadClose.addEventListener('click', function () {
+  upload.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+});
 
 // фокус на элементе
 document.addEventListener('focus', function (evt) {
@@ -158,6 +159,8 @@ change.addEventListener('change', function (evt) {
         img.classList.remove('effects__preview--' + oldValue);
       }
       oldValue = target.value;
+      img.removeAttribute('style');
+
       if (target.value === 'none') {
         label.classList.add('hidden');
       } else {
@@ -165,7 +168,6 @@ change.addEventListener('change', function (evt) {
         img.classList.add('effects__preview--' + target.value);
         pin.style.left = 100 + '%';
         depth.style.width = pin.style.left;
-        img.removeAttribute('style');
         return;
       }
     }
@@ -264,7 +266,7 @@ document.querySelector('.effect-level__pin').addEventListener('mousedown', funct
     target.style.left = Math.ceil(value) + '%';
     changeEffect(Math.ceil(value));
     effectLevel.value = Math.ceil(value);
-    depth.value = Math.ceil(value);
+    depth.style.width = Math.ceil(value);
   };
 
   document.onmouseup = function () {
@@ -272,6 +274,6 @@ document.querySelector('.effect-level__pin').addEventListener('mousedown', funct
     document.onmouseup = null;
     changeEffect(target.style.left);
     effectLevel.value = target.style.left;
-    depth.value = target.style.left;;
+    // depth.value = target.style.left;;
   };
 });
