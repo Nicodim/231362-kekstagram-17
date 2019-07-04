@@ -195,7 +195,8 @@ smoll.addEventListener('click', function () {
     current = 25;
   }
   bar.setAttribute('value', current + '%');
-  return;
+  document.querySelector('.img-upload__preview').style.transform ='scale(' + (current / 100) + ')';
+  return + '%';
 });
 
 // кнопка '-'
@@ -207,7 +208,8 @@ big.addEventListener('click', function () {
     current = 100;
   }
   bar.setAttribute('value', current + '%');
-  return;
+  document.querySelector('.img-upload__preview').style.transform ='scale(' + (current / 100) + ')';
+  return + '%';
 });
 
 // функция получения координат
@@ -265,8 +267,8 @@ document.querySelector('.effect-level__pin').addEventListener('mousedown', funct
     }
     target.style.left = Math.ceil(value) + '%';
     changeEffect(Math.ceil(value));
-    effectLevel.value = Math.ceil(value);
-    depth.style.width = Math.ceil(value);
+    effectLevel.value = Math.ceil(value) + '%';
+    depth.style.width = Math.ceil(value) + '%';
   };
 
   document.onmouseup = function () {
