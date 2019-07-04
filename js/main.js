@@ -105,6 +105,7 @@ uploadOpen.addEventListener('change', function () {
     img.classList.remove('effects__preview--' + oldValue);
   }
   img.removeAttribute('style');
+  document.querySelector('.img-upload__preview').removeAttribute('scale');
   document.addEventListener('keydown', onPopupEscPress);
 });
 
@@ -195,6 +196,7 @@ smoll.addEventListener('click', function () {
     current = 25;
   }
   bar.setAttribute('value', current + '%');
+  // увеличение изображения
   document.querySelector('.img-upload__preview').style.transform ='scale(' + (current / 100) + ')';
   return + '%';
 });
@@ -208,6 +210,7 @@ big.addEventListener('click', function () {
     current = 100;
   }
   bar.setAttribute('value', current + '%');
+  // уменьшение изображения
   document.querySelector('.img-upload__preview').style.transform ='scale(' + (current / 100) + ')';
   return + '%';
 });
