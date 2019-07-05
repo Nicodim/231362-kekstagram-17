@@ -105,7 +105,6 @@ uploadOpen.addEventListener('change', function () {
     img.classList.remove('effects__preview--' + oldValue);
   }
   img.removeAttribute('style');
-  document.querySelector('.img-upload__preview').removeAttribute('scale');
   document.addEventListener('keydown', onPopupEscPress);
 });
 
@@ -161,7 +160,7 @@ change.addEventListener('change', function (evt) {
       }
       oldValue = target.value;
       img.removeAttribute('style');
-
+      bar.setAttribute('value', 100 + '%');
       if (target.value === 'none') {
         label.classList.add('hidden');
       } else {
