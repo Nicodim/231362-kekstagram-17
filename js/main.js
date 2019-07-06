@@ -1,4 +1,5 @@
 'use strict';
+var ESC_KEYCODE = 27;
 var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var comments = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 
@@ -88,28 +89,66 @@ var depth = document.querySelector('.effect-level__depth');
 var label = document.querySelector('.img-upload__effect-level');
 var imgLabel = document.querySelector('.img-upload__label');
 var effect = document.querySelector('.img-upload__effects');
+var socialText = document.querySelector('.social__footer-text');
 
+// Объявили обработчик ESC
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    upClose();
+  }
+};
 // открытие и закрытия попапа.
 uploadOpen.addEventListener('change', function () {
   upload.classList.remove('hidden');
   label.classList.add('hidden');
   if (oldValue !== null) {
-    document.querySelector('.effects__preview--' + oldValue);
+    img.classList.remove('effects__preview--' + oldValue);
   }
-  img.classList.remove('effects__preview--' + oldValue);
   img.removeAttribute('style');
-
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === 27) {
-      upload.classList.add('hidden');
-    }
-  });
+  document.addEventListener('keydown', onPopupEscPress);
 });
+
+var upClose = function () {
+  upload.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
 
 uploadClose.addEventListener('click', function () {
   upload.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
 });
 
+// фокус на элементе
+document.addEventListener('focus', function (evt) {
+  var target = evt.target;
+
+  while (target !== document) {
+    if (target.classList.contains('text__description')) {
+      document.removeEventListener('keydown', onPopupEscPress);
+    }
+    target = target.parentNode;
+  }
+}, true);
+
+document.addEventListener('blur', function (evt) {
+  var target = evt.target;
+
+  while (target !== document) {
+    if (target.classList.contains('text__description')) {
+      document.addEventListener('keydown', onPopupEscPress);
+    }
+    target = target.parentNode;
+  }
+}, true);
+
+// валидация
+socialText.addEventListener('invalid', function () {
+  if (socialText.validity.tooLong) {
+    socialText.setCustomValidity('Комментарий не должен превышать 140-ка символов');
+  } else {
+    socialText.setCustomValidity('');
+  }
+});
 // делегирование кнопок
 var oldValue = null;
 change.addEventListener('change', function (evt) {
@@ -120,6 +159,8 @@ change.addEventListener('change', function (evt) {
         img.classList.remove('effects__preview--' + oldValue);
       }
       oldValue = target.value;
+      img.removeAttribute('style');
+      bar.setAttribute('value', 100 + '%');
       if (target.value === 'none') {
         label.classList.add('hidden');
       } else {
@@ -134,7 +175,7 @@ change.addEventListener('change', function (evt) {
     target = target.parentNode;
   }
 });
-
+// что это??
 imgLabel.addEventListener('change', function () {
   label.classList.add('hidden');
   effect.classList.add('hidden');
@@ -154,7 +195,9 @@ smoll.addEventListener('click', function () {
     current = 25;
   }
   bar.setAttribute('value', current + '%');
-  return;
+  // увеличение изображения
+  document.querySelector('.img-upload__preview').style.transform = 'scale (' + (current / 100) + ')';
+  return +'%';
 });
 
 // кнопка '-'
@@ -166,7 +209,9 @@ big.addEventListener('click', function () {
     current = 100;
   }
   bar.setAttribute('value', current + '%');
-  return;
+  // уменьшение изображения
+  document.querySelector('.img-upload__preview').style.transform = 'scale (' + (current / 100) + ')';
+  return +'%';
 });
 
 // функция получения координат
@@ -208,7 +253,7 @@ function changeEffect(current) {
 
   return;
 }
-
+// изменение положение пина и уровня эффекта
 document.querySelector('.effect-level__pin').addEventListener('mousedown', function (evt) {
   var target = evt.target;
   var shifts = getCoords(target, evt);
@@ -224,7 +269,8 @@ document.querySelector('.effect-level__pin').addEventListener('mousedown', funct
     }
     target.style.left = Math.ceil(value) + '%';
     changeEffect(Math.ceil(value));
-    effectLevel.value = Math.ceil(value);
+    effectLevel.value = Math.ceil(value) + '%';
+    depth.style.width = Math.ceil(value) + '%';
   };
 
   document.onmouseup = function () {
@@ -232,5 +278,6 @@ document.querySelector('.effect-level__pin').addEventListener('mousedown', funct
     document.onmouseup = null;
     changeEffect(target.style.left);
     effectLevel.value = target.style.left;
+    // depth.value = target.style.left;;
   };
 });
