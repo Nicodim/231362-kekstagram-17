@@ -6,7 +6,7 @@ var comments = ['Всё отлично!', 'В целом всё неплохо. 
 var url = function (n) {
   return 'photos/' + n + '.jpg';
 };
-
+// лайки
 var likes = function (min, max) {
   var random = min - 0.5 + Math.random() * (max - min + 1);
   random = Math.round(random);
