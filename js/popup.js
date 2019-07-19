@@ -5,7 +5,8 @@
   var uploadClose = document.getElementById('upload-cancel');
   var label = document.querySelector('.img-upload__effect-level');
   var socialText = document.querySelector('.social__footer-text');
-
+  var img = document.querySelector('.img-upload__preview');
+  var ESC_KEYCODE = 27;
   // Объявили обработчик ESC
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
@@ -16,8 +17,9 @@
   uploadOpen.addEventListener('change', function () {
     upload.classList.remove('hidden');
     label.classList.add('hidden');
-    if (oldValue !== null) {
-      img.classList.remove('effects__preview--' + oldValue);
+
+    if (window.value !== null) {
+      img.classList.remove('effects__preview--' + window.value);
     }
     img.removeAttribute('style');
     document.addEventListener('keydown', onPopupEscPress);
