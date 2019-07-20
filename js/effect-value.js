@@ -14,39 +14,37 @@
   var effect = document.querySelector('.img-upload__effects');
 
   // делегирование кнопок
-  window.value = function () {
 
-    var oldValue = null;
-    change.addEventListener('change', function (evt) {
-      var target = evt.target;
-      while (target !== document) {
-        if (target.classList.contains('effects__radio')) {
-          if (oldValue !== null) {
-            img.classList.remove('effects__preview--' + oldValue);
-          }
-          oldValue = target.value;
-          img.removeAttribute('style');
-          bar.setAttribute('value', 100 + '%');
-          if (target.value === 'none') {
-            label.classList.add('hidden');
-          } else {
-            label.classList.remove('hidden');
-            img.classList.add('effects__preview--' + target.value);
-            pin.style.left = 100 + '%';
-            depth.style.width = pin.style.left;
-            return;
-          }
+  window.oldValue = null;
+  change.addEventListener('change', function (evt) {
+    var target = evt.target;
+    while (target !== document) {
+      if (target.classList.contains('effects__radio')) {
+        if (window.oldValue !== null) {
+          img.classList.remove('effects__preview--' + window.oldValue);
         }
-
-        target = target.parentNode;
+        window.oldValue = target.value;
+        img.removeAttribute('style');
+        bar.setAttribute('value', 100 + '%');
+        if (target.value === 'none') {
+          label.classList.add('hidden');
+        } else {
+          label.classList.remove('hidden');
+          img.classList.add('effects__preview--' + target.value);
+          pin.style.left = 100 + '%';
+          depth.style.width = pin.style.left;
+          return;
+        }
       }
-    });
-    // что это??
-    imgLabel.addEventListener('change', function () {
-      label.classList.add('hidden');
-      effect.classList.add('hidden');
-    });
-  };
+
+      target = target.parentNode;
+    }
+  });
+  // что это??
+  imgLabel.addEventListener('change', function () {
+    label.classList.add('hidden');
+    effect.classList.add('hidden');
+  });
   // функция ограничения
   var getControlValue = function (current, min, max) {
     return min <= current && current <= max;
@@ -62,7 +60,8 @@
     }
     bar.setAttribute('value', current + '%');
     // увеличение изображения
-    document.querySelector('.img-upload__preview').style.transform = 'scale (' + (current / 100) + ')';
+    // document.querySelector('.img-upload__preview').style.transform = 'scale (' + (current / 100) + ')';
+    document.querySelector('.img-upload__preview').setAttribute('style', 'transform: scale(' + (current / 100) + ')');
     return +'%';
   });
 
@@ -76,7 +75,8 @@
     }
     bar.setAttribute('value', current + '%');
     // уменьшение изображения
-    document.querySelector('.img-upload__preview').style.transform = 'scale (' + (current / 100) + ')';
+    // document.querySelector('.img-upload__preview').style.transform = 'scale (' + (current / 100) + ')';
+    document.querySelector('.img-upload__preview').setAttribute('style', 'transform: scale(' + (current / 100) + ')');
     return +'%';
   });
 

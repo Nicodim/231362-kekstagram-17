@@ -18,8 +18,8 @@
     upload.classList.remove('hidden');
     label.classList.add('hidden');
 
-    if (window.value !== null) {
-      img.classList.remove('effects__preview--' + window.value);
+    if (window.oldValue !== null) {
+      img.classList.remove('effects__preview--' + window.oldValue);
     }
     img.removeAttribute('style');
     document.addEventListener('keydown', onPopupEscPress);
