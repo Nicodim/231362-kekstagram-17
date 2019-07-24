@@ -92,15 +92,14 @@
   }
 
   // Успешная загрузка
-  var successHandler = function addtoPictures(array) {
+  var successHandler = function (array) {
     var fragment = document.createDocumentFragment();
-    var newPicture = document.querySelector('.picture');
+    var newPictures = document.querySelector('.pictures');
 
     for (var i = 0; i < array.length; i++) {
-      newPicture.appendChild(renderUserPictures(array[i]));
+      fragment.appendChild(renderUserPictures(array[i]));
     }
-    return fragment;
-
+  newPictures.appendChild(fragment);
   };
 
   // ошибка
