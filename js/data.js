@@ -99,7 +99,10 @@
     for (var i = 0; i < array.length; i++) {
       fragment.appendChild(renderUserPictures(array[i]));
     }
-  newPictures.appendChild(fragment);
+    newPictures.appendChild(fragment);
+
+    document.querySelector('.img-filters').classList.remove('img-filters--inactive');
+
   };
 
   // ошибка
@@ -115,4 +118,5 @@
   };
 
   window.load(successHandler, errorHandler);
+
 })();
