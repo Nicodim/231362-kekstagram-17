@@ -144,7 +144,6 @@
       document.onmouseup = null;
       changeEffect(target.style.left);
       effectLevel.value = target.style.left;
-      // depth.value = target.style.left;;
     };
   });
 })();
