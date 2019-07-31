@@ -41,7 +41,7 @@
 
   var onButtonFilterClick = function (evt) {
     var target = evt.target;
-
+// делегирование кнопок
     while (target !== document) {
       if (['filter-popular', 'filter-new', 'filter-discussed'].indexOf(target.id) !== -1) {
         var current = document.querySelector('.img-filters__button--active');
