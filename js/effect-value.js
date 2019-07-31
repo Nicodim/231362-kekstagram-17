@@ -50,7 +50,7 @@
     return min <= current && current <= max;
   };
 
-  // Кнопка '+'
+  // Кнопка '-'
   smoll.addEventListener('click', function () {
     // шаг кнопки по клику
     var current = parseInt(bar.getAttribute('value'), 10) - 25;
@@ -60,12 +60,11 @@
     }
     bar.setAttribute('value', current + '%');
     // увеличение изображения
-    // document.querySelector('.img-upload__preview').style.transform = 'scale (' + (current / 100) + ')';
     document.querySelector('.img-upload__preview').setAttribute('style', 'transform: scale(' + (current / 100) + ')');
     return +'%';
   });
 
-  // кнопка '-'
+  // кнопка '+'
   big.addEventListener('click', function () {
     // шаг кнопки по клику
     var current = parseInt(bar.getAttribute('value'), 10) + 25;
@@ -75,7 +74,6 @@
     }
     bar.setAttribute('value', current + '%');
     // уменьшение изображения
-    // document.querySelector('.img-upload__preview').style.transform = 'scale (' + (current / 100) + ')';
     document.querySelector('.img-upload__preview').setAttribute('style', 'transform: scale(' + (current / 100) + ')');
     return +'%';
   });
