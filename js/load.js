@@ -1,9 +1,8 @@
 'use strict';
 
 (function () {
-  var url = 'https://js.dump.academy/kekstagram/data';
 
-  window.load = function (onSuccess, onError) {
+  window.load = function (url, onSuccess, onError) {
     var xhr = new XMLHttpRequest();
 
     xhr.responseType = 'json';
