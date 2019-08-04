@@ -21,8 +21,6 @@ var closePopup = function () {
   clearValue.value = '';
 };
 
-
-
 window.full = {
   addtoFull: function (data) {
     var blockFullView = document.querySelector('.big-picture');
