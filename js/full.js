@@ -35,25 +35,25 @@ window.full = {
     var listComments = blockFullView.querySelector('.social__comments');
     var comment = listComments.querySelector('.social__comment');
 
-      blockFullView.classList.remove('hidden');
-      fullPhoto.src = data.url;
-      countLikes.textContent = data.likes;
-      countComments.textContent = data.comments.length;
-      description.textContent = data.description;
-      blockCountComments.classList.add('visually-hidden');
-      loaderComments.classList.add('visually-hidden');
-      comment = comment.cloneNode(true);
+    blockFullView.classList.remove('hidden');
+    fullPhoto.src = data.url;
+    countLikes.textContent = data.likes;
+    countComments.textContent = data.comments.length;
+    description.textContent = data.description;
+    blockCountComments.classList.add('visually-hidden');
+    loaderComments.classList.add('visually-hidden');
+    comment = comment.cloneNode(true);
 
-      var fragment = document.createDocumentFragment();
-      fragment.appendChild(listComments.cloneNode(false));
+    var fragment = document.createDocumentFragment();
+    fragment.appendChild(listComments.cloneNode(false));
 
-      for (var i = 0; i < data.comments.length; i++) {
-       var newComment = comment.cloneNode(true);
-       newComment.querySelector('.social__picture').src = 'img/avatar-' + window.util.getRandomNumber(1, 6) + '.svg';
-       newComment.querySelector('.social__text').textContent = data.comments[i].message;
-       fragment.firstChild.appendChild(newComment);
-     }
-     listComments.parentNode.replaceChild(fragment, listComments);
+    for (var i = 0; i < data.comments.length; i++) {
+      var newComment = comment.cloneNode(true);
+      newComment.querySelector('.social__picture').src = 'img/avatar-' + window.util.getRandomNumber(1, 6) + '.svg';
+      newComment.querySelector('.social__text').textContent = data.comments[i].message;
+      fragment.firstChild.appendChild(newComment);
+    }
+    listComments.parentNode.replaceChild(fragment, listComments);
 
     blockFullView.addEventListener('click', onPopupCloseClick);
     document.addEventListener('keydown', onPopupEscPress);

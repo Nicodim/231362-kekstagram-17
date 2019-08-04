@@ -19,7 +19,7 @@
   window.renderPreview = {
     pictures: [],
     addPictures: function (array) {
-     window.renderPreview.pictures = array;
+      window.renderPreview.pictures = array;
       var fragment = document.createDocumentFragment();
       var picturesContainer = document.querySelector('.pictures');
 
