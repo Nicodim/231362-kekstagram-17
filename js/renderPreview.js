@@ -16,10 +16,10 @@
 
 
   // Добавляем фотки в ДОМ
-  window.render = {
+  window.renderPreview = {
     pictures: [],
     addPictures: function (array) {
-     window.render.pictures = array;
+     window.renderPreview.pictures = array;
       var fragment = document.createDocumentFragment();
       var picturesContainer = document.querySelector('.pictures');
 
