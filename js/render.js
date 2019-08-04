@@ -1,7 +1,7 @@
 'use strict';
 (function () {
   // Генерируем шаблон фотографий
-  function renderUserPictures(picture) {
+  function renderUserPictures(picture, id) {
     var picturesTemplate = document.querySelector('#picture')
     .content.querySelector('.picture');
 
@@ -10,21 +10,22 @@
     clonePicture.querySelector('.picture__img').src = picture.url;
     clonePicture.querySelector('.picture__likes').textContent = picture.likes;
     clonePicture.querySelector('.picture__comments').textContent = picture.comments.length;
-
+    clonePicture.setAttribute('data-id', id);
     return clonePicture;
   }
 
+
   // Добавляем фотки в ДОМ
   window.render = {
-
+    pictures: [],
     addPictures: function (array) {
-
+     window.render.pictures = array;
       var fragment = document.createDocumentFragment();
       var picturesContainer = document.querySelector('.pictures');
 
       for (var i = 0; i < array.length; i++) {
 
-        fragment.appendChild(renderUserPictures(array[i]));
+        fragment.appendChild(renderUserPictures(array[i], i));
       }
 
       picturesContainer.appendChild(fragment);

@@ -41,8 +41,12 @@
 
   var onButtonFilterClick = function (evt) {
     var target = evt.target;
-// делегирование кнопок
+
     while (target !== document) {
+      if (target.classList.contains('picture')) {
+        var id = target.getAttribute('data-id');
+        window.renderPreview(window.render.pictures[id]);
+      }
       if (['filter-popular', 'filter-new', 'filter-discussed'].indexOf(target.id) !== -1) {
         var current = document.querySelector('.img-filters__button--active');
         if (current) {
@@ -55,7 +59,6 @@
           var COUNT = 10;
           images = window.util.getUniqueElement(images, COUNT);
         }
-
         if (target.id === 'filter-discussed') {
           images.sort(function (a, b) {
             return b.comments.length - a.comments.length;
