@@ -31,7 +31,7 @@
 
   var url = 'https://js.dump.academy/kekstagram/data';
 
-  window.load(url, successHandler, errorHandler);
+  window.load(url, successHandler, errorHandler, 'GET');
 
   var renderPictures = window.debounce(function (allPictures) {
     deletePictures();
