@@ -66,4 +66,60 @@
       socialText.setCustomValidity('');
     }
   });
+
+  // валидация хештегов
+  var validate = function (evt) {
+    var target = evt.target;
+
+    while (target !== document) {
+      if (target.classList.contains('text__hashtags')) {
+
+        var textHashtags = document.querySelector('.text__hashtags');
+        var tags = textHashtags.value.split(' ');
+        var arrayTags = [];
+        target.style = 'outline: 2px solid red;';
+
+        textHashtags.setCustomValidity('');
+
+        for (var i = 0; i < tags.length; i++) {
+
+          if (tags[i].indexOf('#') !== 0) {
+            textHashtags.setCustomValidity('хэш-тег начинается с символа # (решётка)');
+            return;
+          }
+
+          if (tags[i].length === 1 && tags[i].indexOf('#') === 0) {
+            textHashtags.setCustomValidity('хеш-тег не может состоять только из одной решётки');
+            return;
+          }
+
+          if (tags[i].includes('#', 1)) {
+            textHashtags.setCustomValidity('хэш-теги разделяются пробелами');
+            return;
+          }
+
+          if (tags.length > 5) {
+            textHashtags.setCustomValidity('нельзя указать больше пяти хэш-тегов');
+            return;
+          }
+
+          if (tags[i].length > 20) {
+            textHashtags.setCustomValidity('максимальная длина одного хэш-тега 20 символов, включая решётку');
+            return;
+          }
+
+          if (arrayTags.includes(tags[i])) {
+            textHashtags.setCustomValidity('один и тот же хэш-тег не может быть использован дважды');
+            return;
+          }
+
+          arrayTags.push(tags[i]);
+        }
+
+      }
+      target = target.parentNode;
+    }
+  };
+
+  document.addEventListener('input', validate);
 })();

@@ -2,7 +2,7 @@
 
 (function () {
 
-  window.load = function (url, onSuccess, onError) {
+  window.load = function (url, onSuccess, onError, method, data) {
     var xhr = new XMLHttpRequest();
 
     xhr.responseType = 'json';
@@ -25,8 +25,8 @@
 
     xhr.timeout = 10000;
 
-    xhr.open('GET', url);
-    xhr.send();
+    xhr.open(method, url);
+    xhr.send(data);
   };
 
 })();
