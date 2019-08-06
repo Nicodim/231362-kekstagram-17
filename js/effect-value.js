@@ -2,7 +2,7 @@
 (function () {
   var change = document.querySelector('.effects__list');
   var img = document.querySelector('.img-upload__preview');
-  var smoll = document.querySelector('.scale__control--smaller');
+  var small = document.querySelector('.scale__control--smaller');
   var big = document.querySelector('.scale__control--bigger');
   var bar = document.querySelector('.scale__control--value');
   var line = document.querySelector('.effect-level__line');
@@ -51,7 +51,7 @@
   };
 
   // Кнопка '+'
-  smoll.addEventListener('click', function () {
+  small.addEventListener('click', function () {
     // шаг кнопки по клику
     var current = parseInt(bar.getAttribute('value'), 10) - 25;
     var getValue = getControlValue(current, 25, 100);
