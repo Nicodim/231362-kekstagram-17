@@ -17,7 +17,7 @@
   uploadOpen.addEventListener('change', function () {
     upload.classList.remove('hidden');
     label.classList.add('hidden');
-
+    upload.value = '';
     if (window.oldValue !== null) {
       img.classList.remove('effects__preview--' + window.oldValue);
     }
