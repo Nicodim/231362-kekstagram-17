@@ -123,17 +123,16 @@
 
   document.addEventListener('input', validate);
 
-  /////////////////////////////////////////////////
 
   // получаем шаблон с сообщением об ошибке
   var errorTemplate = document.querySelector('#error') // шаблон
-    .content
-    .querySelector('.error'); // содержимое шаблона
+  .content
+  .querySelector('.error'); // содержимое шаблона
 
   // получаем шаблон с сообщением об успешной отправке
   var successTemplate = document.querySelector('#success') // шаблон
-    .content
-    .querySelector('.success'); // содержимое шаблона
+  .content
+  .querySelector('.success'); // содержимое шаблона
 
 
   var showMessage = function (template) {
@@ -197,9 +196,9 @@
 
   var onSubmitButtonClick = function (evt) {
     evt.preventDefault();
-      var url = 'https://js.dump.academy/kekstagram';
+    var url = 'https://js.dump.academy/kekstagram';
 
-      window.load(url, uploadSuccess, uploadError, 'POST', new FormData(imgUploadForm));
+    window.load(url, uploadSuccess, uploadError, 'POST', new FormData(imgUploadForm));
   };
 
   imgUploadForm.addEventListener('submit', onSubmitButtonClick);
