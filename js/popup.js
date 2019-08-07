@@ -6,10 +6,9 @@
   var label = document.querySelector('.img-upload__effect-level');
   var socialText = document.querySelector('.social__footer-text');
   var img = document.querySelector('.img-upload__preview');
-  var ESC_KEYCODE = 27;
   // Объявили обработчик ESC
   var onPopupEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+    if (evt.keyCode === window.util.ESC_KEYCODE) {
       upClose();
     }
   };
@@ -77,7 +76,7 @@
         var textHashtags = document.querySelector('.text__hashtags');
         var tags = textHashtags.value.split(' ');
         var arrayTags = [];
-        target.style = 'outline: 2px solid red;';
+        target.style = 'outline: 2px solid rgba(242, 38, 19, 0.8);';
 
         textHashtags.setCustomValidity('');
 
