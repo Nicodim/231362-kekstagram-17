@@ -6,6 +6,7 @@
   var label = document.querySelector('.img-upload__effect-level');
   var socialText = document.querySelector('.social__footer-text');
   var img = document.querySelector('.img-upload__preview');
+  var imgUploadForm = document.querySelector('.img-upload__form'); // общая форма
   // Объявили обработчик ESC
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === window.util.ESC_KEYCODE) {
@@ -16,7 +17,7 @@
   uploadOpen.addEventListener('change', function () {
     upload.classList.remove('hidden');
     label.classList.add('hidden');
-
+    upload.value = '';
     if (window.oldValue !== null) {
       img.classList.remove('effects__preview--' + window.oldValue);
     }
@@ -121,4 +122,84 @@
   };
 
   document.addEventListener('input', validate);
+
+
+  // получаем шаблон с сообщением об ошибке
+  var errorTemplate = document.querySelector('#error') // шаблон
+  .content
+  .querySelector('.error'); // содержимое шаблона
+
+  // получаем шаблон с сообщением об успешной отправке
+  var successTemplate = document.querySelector('#success') // шаблон
+  .content
+  .querySelector('.success'); // содержимое шаблона
+
+
+  var showMessage = function (template) {
+    var message = template.cloneNode(true);
+    var fragment = document.createDocumentFragment();
+    fragment.appendChild(message);
+    document.querySelector('main').appendChild(fragment);
+  };
+
+
+  var closeSuccess = function () {
+    var success = document.querySelector('.success');
+    success.remove();
+    document.removeEventListener('keydown', onSuccessEscPress);
+    document.removeEventListener('click', onSuccessClick);
+  };
+
+  var onSuccessEscPress = function (evt) {
+    window.util.isEscEvent(evt, closeSuccess);
+  };
+
+  var onSuccessClick = function (evt) {
+    var successInner = document.querySelector('.success__inner');
+    var successTitle = successInner.querySelector('.success__title');
+
+    if (evt.target !== successInner && evt.target !== successTitle) {
+      closeSuccess();
+    }
+  };
+
+  var closeError = function () {
+    var error = document.querySelector('.error');
+    error.remove();
+    document.removeEventListener('keydown', onSuccessEscPress);
+    document.removeEventListener('click', onSuccessClick);
+  };
+
+  var onErrorEscPress = function (evt) {
+    window.util.isEscEvent(evt, closeError);
+  };
+
+  var onErrorClick = function () {
+    closeError();
+  };
+
+
+  var uploadSuccess = function () {
+    upClose();
+
+    showMessage(successTemplate);
+    document.addEventListener('keydown', onSuccessEscPress);
+    document.addEventListener('click', onSuccessClick);
+  };
+
+  var uploadError = function () {
+    upload.classList.add('hidden');
+    showMessage(errorTemplate);
+    document.addEventListener('keydown', onErrorEscPress);
+    document.addEventListener('click', onErrorClick);
+  };
+
+  var onSubmitButtonClick = function (evt) {
+    evt.preventDefault();
+    var url = 'https://js.dump.academy/kekstagram';
+
+    window.load(url, uploadSuccess, uploadError, 'POST', new FormData(imgUploadForm));
+  };
+
+  imgUploadForm.addEventListener('submit', onSubmitButtonClick);
 })();
