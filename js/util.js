@@ -26,6 +26,16 @@
         }
       }
       return uniqueElement;
+    },
+
+    isEscEvent: function (evt, action) {
+      // сработает при нажатии ESC и если фокус не находится в поле ввода комментария
+      if (evt.keyCode === ESC_KEYCODE
+        && textDescription !== document.activeElement
+        && textHashtags !== document.activeElement) {
+        action();
+      }
     }
   };
+
 })();

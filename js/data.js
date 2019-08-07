@@ -40,11 +40,12 @@
 
   var onButtonFilterClick = function (evt) {
     var target = evt.target;
+
     // делегирование кнопок
     while (target !== document) {
       if (target.classList.contains('picture')) {
-        var id = target.getAttribute('data-id'); // dfdfdf
-        window.full.addtoFull(window.renderPreview.pictures[id]); // jjkk
+        var id = target.getAttribute('data-id');
+        window.full.addtoFull(window.renderPreview.pictures[id]);
       }
       if (['filter-popular', 'filter-new', 'filter-discussed'].indexOf(target.id) !== -1) {
         var current = document.querySelector('.img-filters__button--active');
