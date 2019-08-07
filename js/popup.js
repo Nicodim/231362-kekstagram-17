@@ -76,7 +76,7 @@
         var textHashtags = document.querySelector('.text__hashtags');
         var tags = textHashtags.value.split(' ');
         var arrayTags = [];
-        target.style = 'outline: 2px solid red;';
+        target.style = 'outline: 2px solid rgba(242, 38, 19, 0.8);';
 
         textHashtags.setCustomValidity('');
 
