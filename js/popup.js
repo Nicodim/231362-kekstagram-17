@@ -75,7 +75,7 @@
       if (target.classList.contains('text__hashtags')) {
 
         var textHashtags = document.querySelector('.text__hashtags');
-        var tags = textHashtags.value.split(' ');
+        var tags = textHashtags.value.trim().split(' ');
         var arrayTags = [];
         target.style = 'outline: 2px solid rgba(242, 38, 19, 0.8);';
 
@@ -112,7 +112,7 @@
             textHashtags.setCustomValidity('один и тот же хэш-тег не может быть использован дважды');
             return;
           }
-          arrayTags.tags[i].trim();
+
           arrayTags.push(tags[i]);
         }
 
@@ -185,6 +185,7 @@
     showMessage(successTemplate);
     document.addEventListener('keydown', onSuccessEscPress);
     document.addEventListener('click', onSuccessClick);
+    imgUploadForm.reset();
   };
 
   var uploadError = function () {
@@ -192,6 +193,7 @@
     showMessage(errorTemplate);
     document.addEventListener('keydown', onErrorEscPress);
     document.addEventListener('click', onErrorClick);
+    imgUploadForm.reset();
   };
 
   var onSubmitButtonClick = function (evt) {
@@ -199,7 +201,6 @@
     var url = 'https://js.dump.academy/kekstagram';
 
     window.load(url, uploadSuccess, uploadError, 'POST', new FormData(imgUploadForm));
-    imgUploadForm.reset();
   };
 
   imgUploadForm.addEventListener('submit', onSubmitButtonClick);
