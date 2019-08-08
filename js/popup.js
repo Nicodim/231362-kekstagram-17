@@ -112,7 +112,7 @@
             textHashtags.setCustomValidity('один и тот же хэш-тег не может быть использован дважды');
             return;
           }
-
+          arrayTags.tags[i].trim();
           arrayTags.push(tags[i]);
         }
 
@@ -199,6 +199,7 @@
     var url = 'https://js.dump.academy/kekstagram';
 
     window.load(url, uploadSuccess, uploadError, 'POST', new FormData(imgUploadForm));
+    imgUploadForm.reset();
   };
 
   imgUploadForm.addEventListener('submit', onSubmitButtonClick);
