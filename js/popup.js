@@ -7,12 +7,14 @@
   var socialText = document.querySelector('.social__footer-text');
   var img = document.querySelector('.img-upload__preview');
   var imgUploadForm = document.querySelector('.img-upload__form'); // общая форма
+
   // Объявили обработчик ESC
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === window.util.ESC_KEYCODE) {
       upClose();
     }
   };
+
   // открытие и закрытия попапа.
   uploadOpen.addEventListener('change', function () {
     upload.classList.remove('hidden');
