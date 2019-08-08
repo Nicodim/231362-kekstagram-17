@@ -7,12 +7,14 @@
   var socialText = document.querySelector('.social__footer-text');
   var img = document.querySelector('.img-upload__preview');
   var imgUploadForm = document.querySelector('.img-upload__form'); // общая форма
+
   // Объявили обработчик ESC
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === window.util.ESC_KEYCODE) {
       upClose();
     }
   };
+
   // открытие и закрытия попапа.
   uploadOpen.addEventListener('change', function () {
     upload.classList.remove('hidden');
@@ -75,7 +77,7 @@
       if (target.classList.contains('text__hashtags')) {
 
         var textHashtags = document.querySelector('.text__hashtags');
-        var tags = textHashtags.value.split(' ');
+        var tags = textHashtags.value.trim().split(' ');
         var arrayTags = [];
         target.style = 'outline: 2px solid rgba(242, 38, 19, 0.8);';
 
@@ -185,6 +187,7 @@
     showMessage(successTemplate);
     document.addEventListener('keydown', onSuccessEscPress);
     document.addEventListener('click', onSuccessClick);
+    imgUploadForm.reset();
   };
 
   var uploadError = function () {
@@ -192,6 +195,7 @@
     showMessage(errorTemplate);
     document.addEventListener('keydown', onErrorEscPress);
     document.addEventListener('click', onErrorClick);
+    imgUploadForm.reset();
   };
 
   var onSubmitButtonClick = function (evt) {
